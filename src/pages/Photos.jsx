@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -7,7 +6,7 @@ import axios from "axios";
 import "./Form.css";
 import "./Photos.css";
 
-let API = "";
+let API = "https://rizzchat-be-4agq.onrender.com";
 
 function Photos(){
   let [files, setFiles] = useState([]);
@@ -31,7 +30,7 @@ function Photos(){
 
   let loadFiles = () => {
     axios.get(`${API}/files`)
-      .then((res)=>setFiles(res.data))
+      .then((res)=>setFiles(Array.isArray(res.data) ? res.data : []))
       .catch((err)=>alert(err));
   };
 
